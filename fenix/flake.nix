@@ -54,6 +54,7 @@
             rustc
             cargo
             {%- endif -%}
+
             {%- if rust-analyzer -%}
               {%- if channel == "nightly" -%}
             fenix-system.rust-analyzer
@@ -61,6 +62,7 @@
             rust-analyzer
               {%- endif -%}
             {%- endif -%}
+
             lld
             pkgconfig
             udev
