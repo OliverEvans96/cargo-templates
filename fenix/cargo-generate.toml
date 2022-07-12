@@ -1,3 +1,9 @@
+[placeholders.channel]
+type = "string"
+prompt = "Which rust channel to use?"
+choices = ["stable", "nightly"]
+default = "stable"
+
 [placeholders.rust-analyzer]
 type = "bool"
 prompt = "Include rust-analyzer nightly in nix-shell?"

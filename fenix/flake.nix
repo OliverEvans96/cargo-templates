@@ -1,9 +1,11 @@
 {
   inputs = {
+    {%- if channel == "nightly" -%}
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    {%- endif -%}
     nixpkgs.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
@@ -12,6 +14,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        {%- if channel == "nightly" -%}
         fenix-system = fenix.packages.${system};
         rust-toolchain = (with fenix-system;
           combine [
@@ -24,6 +27,9 @@
           rustc = rust-toolchain;
           cargo = rust-toolchain;
         };
+        {%- else -%}
+        rustPlatform = pkgs.rustPlatform
+        {%- endif -%}
       in {
         defaultPackage = rustPlatform.buildRustPackage {
           pname = "{{project-name}}";
@@ -42,11 +48,19 @@
 
           # build-time deps
           nativeBuildInputs = (with pkgs; [
+            {%- if channel == "nightly" -%}
             rust-toolchain
-            {% if rust-analyzer %}
+            {%- else -%}
+            rustc
+            cargo
+            {%- endif -%}
+            {%- if rust-analyzer -%}
+              {%- if channel == "nightly" -%}
             fenix-system.rust-analyzer
-            {% endif %}
-
+              {%- else -%}
+            rust-analyzer
+              {%- endif -%}
+            {%- endif -%}
             lld
             pkgconfig
             udev
