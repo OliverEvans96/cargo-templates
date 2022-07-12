@@ -1,0 +1,4 @@
+[placeholders.rust-analyzer]
+type = "bool"
+prompt = "Include rust-analyzer nightly in nix-shell?"
+default = false
