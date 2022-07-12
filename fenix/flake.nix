@@ -44,7 +44,7 @@
           nativeBuildInputs = (with pkgs; [
             rust-toolchain
             {% if rust-analyzer %}
-            rust-analyzer
+            fenix-system.rust-analyzer
             {% endif %}
 
             lld
