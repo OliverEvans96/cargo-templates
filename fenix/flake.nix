@@ -41,7 +41,6 @@
           src = ./.;
 
           # build-time deps
-          # from https://blog.thomasheartman.com/posts/bevy-getting-started-on-nixos
           nativeBuildInputs = (with pkgs; [
             rust-toolchain
             {% if rust-analyzer %}
