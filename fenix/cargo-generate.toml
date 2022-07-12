@@ -8,3 +8,12 @@ default = "stable"
 type = "bool"
 prompt = "Include rust-analyzer nightly in nix-shell?"
 default = false
+
+[placeholders.license]
+type = "string"
+prompt = "License?"
+choices = ["MIT", "None"]
+default = "MIT"
+
+[conditional.'license == "None"']
+ignore = [ "LICENSE" ]
