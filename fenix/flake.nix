@@ -28,7 +28,7 @@
           cargo = rust-toolchain;
         };
         {% else -%}
-        rustPlatform = pkgs.rustPlatform
+        rustPlatform = pkgs.rustPlatform;
         {% endif -%}
       in {
         defaultPackage = rustPlatform.buildRustPackage {
